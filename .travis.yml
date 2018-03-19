@@ -1,0 +1,15 @@
+cache:
+  directories:
+  - $HOME/.jdk
+  - $HOME/.m2
+sudo: false
+env:
+  global:
+  - MVN_ARGS="install"
+install: true
+services:
+- docker
+before_script:
+- if [ \( -n "${TRAVIS_TAG}" \) -a  "${TRAVIS_PULL_REQUEST}" = "false" ]; then export MVN_ARGS="deploy -latestTag=latest -Ddocker.registry= -Ddocker.username= -Ddocker.password="; fi;
+script:
+- ./jdk-wrapper.sh ./mvnw clean ${MVN_ARGS} -U
