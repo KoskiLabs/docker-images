@@ -6,10 +6,12 @@ sudo: false
 env:
   global:
   - MVN_ARGS="install"
+  - secure: "Cy12DiLuLdqaERxI7jsPMXLDi207bSXlK8GdJIllXPqchKdjZW7gvBOcLYYHP2LJu3UzJvI0JIY+lIXLcSsZN0WYDckUIBhD158tofoGxrFVQqUe3QD34YNNwwgE0HAhTlwiGLkFSZtYzRh3yzyfPbVTp+rkP+QAqjaYtOPv45edsz3UJb44B2JkdQdxuV1sJ3Zagk0TDpRLSw+pqMRn0su+iCpfHGIjR1B3QFtNHi7r2KWRNM2AsdgJM2EaZgKHieQLAfTgMNFXT/N3puWxeK1jwn4NE9p/ivxM0rYdI6bt6K+mord+EsVKFRJr3C0t67Aa4nlG5KgmByMtWr+tvPsxUePlwVRT1oyePKiMygys7lXYl5F5N3wYbBPIRWoN05cNp9VHv4gPJ6DSL+5cFLCPEQdOoMmCFkEifog7ksM9YR4xLgfGzTxgqTDipJvLdfN5pCv2o9BO1iLq1eNf+7cb2xBYKhC3aO6lWIIoXtOklO1xNpw2YL9aELEsjfMsfcF+p0JHoiYB1Oe5KMfeKbHzlGncTwLZISWL8Y3mFuQQOjgAYy/w2mnwOXRj12vchEqWpfmUpxLOS7yvUD1/bcG/5auwnfyktjuYPVtBTuU6GYsUfT7AftfFNQy185de9K0zr/sd36d+wgb+7ebUiesZUKdGz7nB4P/00ShbAqo="
+  - secure: "oKKORrk8UkQiTulTRW/AmG72ZGet0HD5AGmw54GMIfFBTtW6cdOS5Q4+duiEdUeZovltzP5ooyRJR6N7U6KwMmYrtgF/E9xqJmF7Z6stgKv74kYjXDfZ1hj+r0JlOVkBSJ0k/vudpDYpzpNHq9it3XwYqrb8vkp+tSPm98AnPBhTBgQprAHNCXSyyEE8jcMBqcVvE2biFtiYU0NXs7IdFppoQQ4RBXYRrwAM9p32Nsth7VQ78e94Vl7YtxwJGCA7/bLTPSHkl4BvIU62hrwUjzUdagWQ8YE4/gc/3s9U/CRUcjtc+6+vLIib9QN3rkKpns71eH3SQi/feJNqGIFNXzYuKYst6ML3zE6TM7fxKvn7aHTXkzth05uJo2ns1QibR+IkxF8FM/fx67tftRtz8GbB/DsKDZrqrr9RGbAGAfumSxlSaZptswL0+gTxfRnieuVgyQG680ZRsG4Ooo/AUrLBUVFzR6WpZBMJ7D9glCqsoc6edJFJJxfU7cyMkHUkbQiUbKZxKnC/U7tVwPrN+6qxniCijIFzyMto3Pk5sUpKfRVtsbw53XPwqXhez2cfD4rZZxQsA3BthnCXwzqXZro7U24xAIlRDyQRvxxcCWpymQj9g4FEKm2nYZJA8RNnckJDEyxByxKtX50YFqHuqx3YQugnbnFIJCE3bWrTz2o="
 install: true
 services:
 - docker
 before_script:
-- if [ \( -n "${TRAVIS_TAG}" \) -a  "${TRAVIS_PULL_REQUEST}" = "false" ]; then export MVN_ARGS="deploy -latestTag=latest -Ddocker.registry= -Ddocker.username= -Ddocker.password="; fi;
+- if [ \( -n "${TRAVIS_TAG}" \) -a  "${TRAVIS_PULL_REQUEST}" = "false" ]; then export MVN_ARGS="deploy -DlatestTag=latest -Ddocker.username=${DOCKER_HUB_USERNAME} -Ddocker.password=${DOCKER_HUB_PASSWORD}"; fi;
 script:
 - ./jdk-wrapper.sh ./mvnw clean ${MVN_ARGS} -U
