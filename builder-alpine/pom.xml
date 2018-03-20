@@ -27,13 +27,13 @@
   <name>Koski Labs Builder Docker Image</name>
   <description>Sub-module for Koski Labs builder Docker image.</description>
   <url>https://github.com/KoskiLabs/docker-images</url>
-  <version>0.9.0-SNAPSHOT</version>
+  <version>0.9.0</version>
 
   <scm>
     <connection>scm:git:git@github.com:koskilabs/docker-images.git</connection>
     <developerConnection>scm:git:git@github.com:koskilabs/docker-images.git</developerConnection>
     <url>https://github.com/koskilabs/docker-images</url>
-    <tag>HEAD</tag>
+    <tag>builder-alpine-0.9.0</tag>
   </scm>
 
   <build>
