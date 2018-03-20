@@ -14,17 +14,31 @@ Docker Images
          alt="Releases">
 </a>
 
-Docker image definitions for Koski Labs projects managed as [Maven](https://maven.apache.org/) sub-modules, built and published to Docker Hub using [Fabric 8's Maven Docker plugin](https://dmp.fabric8.io/).
+Docker image definitions for Koski Labs projects managed as [Maven](https://maven.apache.org/) sub-modules, built and published to [Docker Hub](https://hub.docker.com/u/koskilabs/) using [Fabric 8's Maven Docker plugin](https://dmp.fabric8.io/).
 
-Quick Start
------------
+Images
+------
 
-<>
+### Builder-Alpine
+This image is intended for use to execute builds through [Koski Lab's Builder](https://github.com/KoskiLabs/builder) under Alpine. It includes
+libc and other prerequisites for [Builder](https://github.com/KoskiLabs/builder) and [JDK Wrapper](https://github.com/KoskiLabs/jdk-wrapper)
+to function under Alpine.
 
-Usage
------
+Why Maven?
+----------
 
-<>
+* No Scripting - Leverage standardized tasks in the [Fabric8 Maven Docker Plugin](https://github.com/fabric8io/docker-maven-plugin)
+for building, running and pushing Docker images.
+* Release Process - The [Maven Release Plugin](http://maven.apache.org/maven-release/maven-release-plugin/)
+provides a well-defined process for versioning, tagging and committing releases to the project.
+* Testing - The Maven build lifecycle already supports unit testing of any code you compile and
+include in your Docker image using the [Surefire Plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
+as well as integration testing of the resulting Docker image using the [Failsafe Plugin](http://maven.apache.org/surefire/maven-failsafe-plugin/).
+* Version Locking - When combined with artifact publication into a Maven repository like [Maven Central](https://search.maven.org/),
+[Nexus](https://www.sonatype.com/nexus-repository-sonatype) or [Artifactory](https://jfrog.com/artifactory/)
+the version of a released docker image cannot be changed by the release process since the version is locked in
+the Maven repository. Of course the Docker tags remain mutable but at least they won't be changed by the
+release process!
 
 Prerequisites
 -------------
